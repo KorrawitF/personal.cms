@@ -1,3 +1,13 @@
 spring:
   application:
     name: cms
+  config:
+    import: optional:file:.env[.properties]
+  datasource:
+    host: ${DATABASE_HOST:localhost}
+    port: ${DATABASE_PORT:5432}
+    username: ${DATABASE_USER:postgres}
+    password: ${DATABASE_PASS:}
+    database: ${DATABASE_NAME:cms}
+    mode: ${DATABASE_MODE:disable}
+    ssl: ${DATABASE_SSL:false}
