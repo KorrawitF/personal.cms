@@ -1,0 +1,37 @@
+{"properties": [
+    {
+        "name": "spring.datasource.host",
+        "type": "java.lang.String",
+        "description": "A description for 'spring.datasource.host'"
+    },
+    {
+        "name": "spring.datasource.port",
+        "type": "java.lang.String",
+        "description": "A description for 'spring.datasource.port'"
+    },
+    {
+        "name": "spring.datasource.ssl",
+        "type": "java.lang.String",
+        "description": "A description for 'spring.datasource.ssl'"
+    },
+    {
+        "name": "spring.datasource.mode",
+        "type": "java.lang.String",
+        "description": "A description for 'spring.datasource.mode'"
+    },
+    {
+        "name": "spring.datasource.database",
+        "type": "java.lang.String",
+        "description": "A description for 'spring.datasource.database'"
+    },
+    {
+        "name": "spring.datasource.password",
+        "type": "java.lang.String",
+        "description": "A description for 'spring.datasource.password'"
+    },
+    {
+        "name": "spring.datasource.username",
+        "type": "java.lang.String",
+        "description": "A description for 'spring.datasource.username'"
+    }
+]}
