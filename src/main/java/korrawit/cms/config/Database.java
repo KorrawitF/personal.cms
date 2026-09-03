@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import korrawit.cms.error.DatabaseConnectionException;
 
 @Component
 public class Database {
@@ -71,8 +72,11 @@ public class Database {
         try {
             this.conn = DriverManager.getConnection(url, props);
         } catch (SQLException e) {
-            log.error("Failed to connect to database: {}:{}/{}", host, port, database, e);
-            throw new RuntimeException(e);
+            log.error("Failed to connect to database: {}:{}/{} - {}", host, port, database, e.getMessage());
+            log.debug("Connection failure detail", e);
+            throw new DatabaseConnectionException(
+                    "Could not connect to database %s:%s/%s - %s".formatted(host, port, database, e.getMessage()),
+                    e);
         }
 
         return this.conn;

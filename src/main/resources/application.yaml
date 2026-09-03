@@ -11,3 +11,7 @@ spring:
     database: ${DATABASE_NAME:cms}
     mode: ${DATABASE_MODE:disable}
     ssl: ${DATABASE_SSL:false}
+
+logging:
+  level:
+    "[org.springframework.boot.SpringApplication]": off
