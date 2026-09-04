@@ -1,0 +1,4 @@
+$kind: collection
+description: CRUD endpoints for Project, WorkExperiences, and the SkillDomains aggregate (SkillDomains -> Skills -> Experiences).
+variables:
+  baseUrl: http://localhost:8080

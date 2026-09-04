@@ -1,0 +1,18 @@
+$kind: http-request
+url: "{{baseUrl}}/api/work-experiences/1"
+method: PUT
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "jobTitle": "Senior Backend Engineer",
+      "companyName": "Acme Corp",
+      "detail": "Promoted; leading the API platform team.",
+      "techStack": ["Java", "Spring Boot", "PostgreSQL", "Kafka"],
+      "icon": "briefcase",
+      "startDate": "2023-06-01",
+      "endDate": null
+    }
+order: 4000
