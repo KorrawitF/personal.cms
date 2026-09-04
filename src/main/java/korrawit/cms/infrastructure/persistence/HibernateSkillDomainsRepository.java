@@ -6,9 +6,8 @@ import java.util.Optional;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
-import korrawit.cms.domain.model.SkillDomains;
+import korrawit.cms.domain.entity.SkillDomains;
 import korrawit.cms.domain.repository.SkillDomainsRepository;
-import korrawit.cms.infrastructure.persistence.entity.SkillDomainsEntity;
 import korrawit.cms.infrastructure.persistence.mapper.SkillDomainsMapper;
 
 @Repository
@@ -23,14 +22,14 @@ public class HibernateSkillDomainsRepository implements SkillDomainsRepository {
     @Override
     public Optional<SkillDomains> findById(int id) {
         return sessionFactory.fromTransaction(session -> Optional
-                .ofNullable(session.find(SkillDomainsEntity.class, id))
+                .ofNullable(session.find(korrawit.cms.infrastructure.persistence.model.SkillDomains.class, id))
                 .map(SkillDomainsMapper::toDomain));
     }
 
     @Override
     public List<SkillDomains> findAll() {
         return sessionFactory.fromTransaction(session -> session
-                .createSelectionQuery("from SkillDomainsEntity", SkillDomainsEntity.class)
+                .createSelectionQuery("from SkillDomains", korrawit.cms.infrastructure.persistence.model.SkillDomains.class)
                 .getResultList()
                 .stream()
                 .map(SkillDomainsMapper::toDomain)
@@ -40,7 +39,8 @@ public class HibernateSkillDomainsRepository implements SkillDomainsRepository {
     @Override
     public SkillDomains save(SkillDomains skillDomain) {
         return sessionFactory.fromTransaction(session -> {
-            SkillDomainsEntity merged = session.merge(SkillDomainsMapper.toEntity(skillDomain));
+            korrawit.cms.infrastructure.persistence.model.SkillDomains merged = session
+                    .merge(SkillDomainsMapper.toEntity(skillDomain));
             return SkillDomainsMapper.toDomain(merged);
         });
     }
@@ -48,7 +48,8 @@ public class HibernateSkillDomainsRepository implements SkillDomainsRepository {
     @Override
     public void deleteById(int id) {
         sessionFactory.inTransaction(session -> {
-            SkillDomainsEntity entity = session.find(SkillDomainsEntity.class, id);
+            korrawit.cms.infrastructure.persistence.model.SkillDomains entity = session
+                    .find(korrawit.cms.infrastructure.persistence.model.SkillDomains.class, id);
             if (entity != null) {
                 session.remove(entity);
             }

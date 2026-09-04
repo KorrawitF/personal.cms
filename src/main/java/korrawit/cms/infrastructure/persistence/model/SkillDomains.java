@@ -1,4 +1,4 @@
-package korrawit.cms.infrastructure.persistence.entity;
+package korrawit.cms.infrastructure.persistence.model;
 
 import java.time.Instant;
 
@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "skill_domains")
-public class SkillDomainsEntity {
+public class SkillDomains {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,10 +30,10 @@ public class SkillDomainsEntity {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    protected SkillDomainsEntity() {
+    protected SkillDomains() {
     }
 
-    public SkillDomainsEntity(Integer id, String name, String color, String summary, Instant createdAt,
+    public SkillDomains(Integer id, String name, String color, String summary, Instant createdAt,
             Instant updatedAt) {
         this.id = id;
         this.name = name;

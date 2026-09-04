@@ -10,7 +10,7 @@ import org.hibernate.cfg.AvailableSettings;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import korrawit.cms.infrastructure.persistence.entity.SkillDomainsEntity;
+import korrawit.cms.infrastructure.persistence.model.SkillDomains;
 
 @Configuration
 public class HibernateConfig {
@@ -26,7 +26,7 @@ public class HibernateConfig {
 
         try {
             MetadataSources sources = new MetadataSources(registry)
-                    .addAnnotatedClass(SkillDomainsEntity.class);
+                    .addAnnotatedClass(SkillDomains.class);
 
             return sources.buildMetadata().buildSessionFactory();
         } catch (Exception e) {

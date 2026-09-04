@@ -3,7 +3,7 @@ package korrawit.cms.domain.repository;
 import java.util.List;
 import java.util.Optional;
 
-import korrawit.cms.domain.model.SkillDomains;
+import korrawit.cms.domain.entity.SkillDomains;
 
 public interface SkillDomainsRepository {
 

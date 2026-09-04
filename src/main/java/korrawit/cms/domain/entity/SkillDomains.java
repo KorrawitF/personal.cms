@@ -1,4 +1,4 @@
-package korrawit.cms.domain.model;
+package korrawit.cms.domain.entity;
 
 import java.time.Instant;
 
