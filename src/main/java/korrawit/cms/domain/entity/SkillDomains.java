@@ -8,6 +8,7 @@ public class SkillDomains {
     private String name;
     private String color;
     private String summary;
+    private Skills[] skills;
     private Instant createdAt;
     private Instant updatedAt;
 

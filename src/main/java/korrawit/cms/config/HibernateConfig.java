@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import korrawit.cms.infrastructure.persistence.model.SkillDomains;
+import korrawit.cms.infrastructure.persistence.model.Skills;
 
 @Configuration
 public class HibernateConfig {
@@ -26,7 +27,8 @@ public class HibernateConfig {
 
         try {
             MetadataSources sources = new MetadataSources(registry)
-                    .addAnnotatedClass(SkillDomains.class);
+                    .addAnnotatedClass(SkillDomains.class)
+                    .addAnnotatedClass(Skills.class);
 
             return sources.buildMetadata().buildSessionFactory();
         } catch (Exception e) {
