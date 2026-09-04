@@ -1,6 +1,7 @@
 package korrawit.cms.infrastructure.persistence.model;
 
 import java.time.Instant;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -41,8 +42,8 @@ public class Skills {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    @OneToMany(mappedBy = "experience")
-    private Experiences[] experiences;
+    @OneToMany(mappedBy = "skill")
+    private List<Experiences> experiences;
 
     protected Skills() {
     }
@@ -65,6 +66,10 @@ public class Skills {
 
     public SkillDomains getDomain() {
         return domain;
+    }
+
+    public List<Experiences> getExperiences() {
+        return experiences;
     }
 
 }

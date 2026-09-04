@@ -5,6 +5,7 @@ public class Skills {
     private Integer domainId;
     private Integer level;
     private String summary;
+    private Experiences[] experiences;
     private String[] tools;
     private String[] useCases;
     private String parent;

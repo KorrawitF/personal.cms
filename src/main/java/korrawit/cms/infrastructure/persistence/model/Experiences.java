@@ -16,8 +16,8 @@ public class Experiences {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "experience_id", nullable = false)
-    private Experiences experience;
+    @JoinColumn(name = "skill_id", nullable = false)
+    private Skills skill;
 
     private String title;
 
@@ -28,11 +28,19 @@ public class Experiences {
     protected Experiences() {
     }
 
-    public Experiences(Integer id, Experiences exp, String title, String org, String detail) {
+    public Experiences(Integer id, Skills skill, String title, String org, String detail) {
         this.id = id;
-        this.experience = exp;
+        this.skill = skill;
         this.title = title;
         this.org = org;
         this.detail = detail;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public Skills getSkill() {
+        return skill;
     }
 }
