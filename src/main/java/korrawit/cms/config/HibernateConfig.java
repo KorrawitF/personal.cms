@@ -14,6 +14,7 @@ import korrawit.cms.infrastructure.persistence.model.Experiences;
 import korrawit.cms.infrastructure.persistence.model.Project;
 import korrawit.cms.infrastructure.persistence.model.SkillDomains;
 import korrawit.cms.infrastructure.persistence.model.Skills;
+import korrawit.cms.infrastructure.persistence.model.WorkExperiences;
 
 @Configuration
 public class HibernateConfig {
@@ -32,7 +33,8 @@ public class HibernateConfig {
                     .addAnnotatedClass(SkillDomains.class)
                     .addAnnotatedClass(Skills.class)
                     .addAnnotatedClass(Experiences.class)
-                    .addAnnotatedClass(Project.class);
+                    .addAnnotatedClass(Project.class)
+                    .addAnnotatedClass(WorkExperiences.class);
 
             return sources.buildMetadata().buildSessionFactory();
         } catch (Exception e) {
