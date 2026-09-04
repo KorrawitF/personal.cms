@@ -3,6 +3,7 @@ package korrawit.cms.infrastructure.persistence.model;
 import java.time.Instant;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,7 +33,7 @@ public class SkillDomains {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    @OneToMany(mappedBy = "domain")
+    @OneToMany(mappedBy = "domain", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Skills> skills;
 
     protected SkillDomains() {
@@ -94,5 +95,9 @@ public class SkillDomains {
 
     public List<Skills> getSkills() {
         return skills;
+    }
+
+    public void setSkills(List<Skills> skills) {
+        this.skills = skills;
     }
 }

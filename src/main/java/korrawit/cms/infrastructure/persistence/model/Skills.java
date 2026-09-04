@@ -3,6 +3,7 @@ package korrawit.cms.infrastructure.persistence.model;
 import java.time.Instant;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -42,14 +43,14 @@ public class Skills {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    @OneToMany(mappedBy = "skill")
+    @OneToMany(mappedBy = "skill", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Experiences> experiences;
 
     protected Skills() {
     }
 
     public Skills(Integer id, SkillDomains domain, Integer level, String summary, String[] tools, String[] useCases,
-            String parent, String icon) {
+            String parent, String icon, Instant createdAt, Instant updatedAt) {
         this.id = id;
         this.domain = domain;
         this.level = level;
@@ -58,6 +59,8 @@ public class Skills {
         this.useCases = useCases;
         this.parent = parent;
         this.icon = icon;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public Integer getId() {
@@ -102,6 +105,10 @@ public class Skills {
 
     public List<Experiences> getExperiences() {
         return experiences;
+    }
+
+    public void setExperiences(List<Experiences> experiences) {
+        this.experiences = experiences;
     }
 
 }
