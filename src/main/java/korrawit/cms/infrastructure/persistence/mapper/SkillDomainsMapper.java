@@ -1,5 +1,6 @@
 package korrawit.cms.infrastructure.persistence.mapper;
 
+import korrawit.cms.domain.entity.Skills;
 import korrawit.cms.domain.entity.SkillDomains;
 
 public final class SkillDomainsMapper {
@@ -11,8 +12,12 @@ public final class SkillDomainsMapper {
         if (entity == null) {
             return null;
         }
-        return new SkillDomains(entity.getId(), entity.getName(), entity.getColor(), entity.getSummary(),
-                entity.getCreatedAt(), entity.getUpdatedAt());
+        SkillDomains domain = new SkillDomains(entity.getId(), entity.getName(), entity.getColor(),
+                entity.getSummary(), entity.getCreatedAt(), entity.getUpdatedAt());
+        if (entity.getSkills() != null) {
+            domain.setSkills(entity.getSkills().stream().map(SkillsMapper::toDomain).toArray(Skills[]::new));
+        }
+        return domain;
     }
 
     public static korrawit.cms.infrastructure.persistence.model.SkillDomains toEntity(SkillDomains domain) {

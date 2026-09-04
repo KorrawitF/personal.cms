@@ -68,6 +68,38 @@ public class Skills {
         return domain;
     }
 
+    public Integer getLevel() {
+        return level;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public String[] getTools() {
+        return tools;
+    }
+
+    public String[] getUseCases() {
+        return useCases;
+    }
+
+    public String getParent() {
+        return parent;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public Instant getUpdatedAt() {
+        return updatedAt;
+    }
+
     public List<Experiences> getExperiences() {
         return experiences;
     }

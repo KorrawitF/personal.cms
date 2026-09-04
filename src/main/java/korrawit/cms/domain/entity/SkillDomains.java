@@ -72,4 +72,12 @@ public class SkillDomains {
     public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    public Skills[] getSkills() {
+        return skills;
+    }
+
+    public void setSkills(Skills[] skills) {
+        this.skills = skills;
+    }
 }

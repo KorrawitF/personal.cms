@@ -43,4 +43,16 @@ public class Experiences {
     public Skills getSkill() {
         return skill;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getOrg() {
+        return org;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
 }

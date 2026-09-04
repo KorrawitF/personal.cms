@@ -91,4 +91,8 @@ public class SkillDomains {
     public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    public List<Skills> getSkills() {
+        return skills;
+    }
 }
