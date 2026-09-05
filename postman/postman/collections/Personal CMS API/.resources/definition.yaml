@@ -1,4 +1,4 @@
 $kind: collection
-description: CRUD endpoints for Project, WorkExperiences, and the SkillDomains aggregate (SkillDomains -> Skills -> Experiences).
+description: CRUD endpoints for Project, WorkExperiences, the SkillDomains aggregate (SkillDomains -> Skills -> Experiences), and Content.
 variables:
   baseUrl: http://localhost:8080

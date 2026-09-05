@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "6f3a2b10-4c1a-4e2a-9b3e-2f7d1c8a9e10",
     "name": "Personal CMS API",
-    "description": "CRUD endpoints for Project, WorkExperiences, and the SkillDomains aggregate (SkillDomains -> Skills -> Experiences).",
+    "description": "CRUD endpoints for Project, WorkExperiences, the SkillDomains aggregate (SkillDomains -> Skills -> Experiences), and Content.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -255,6 +255,90 @@
               "raw": "{{baseUrl}}/api/skill-domains/1",
               "host": ["{{baseUrl}}"],
               "path": ["api", "skill-domains", "1"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Content",
+      "item": [
+        {
+          "name": "List all",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/contents",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "contents"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get one",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/contents/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "contents", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"page\": \"home\",\n  \"content\": {\n    \"heading\": \"Welcome to my portfolio\",\n    \"subheading\": \"Backend engineer building things on the JVM\",\n    \"ctaLabel\": \"View projects\"\n  }\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/contents",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "contents"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"page\": \"home\",\n  \"content\": {\n    \"heading\": \"Welcome to my portfolio\",\n    \"subheading\": \"Backend engineer building things on the JVM\",\n    \"ctaLabel\": \"See what I've shipped\"\n  }\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/contents/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "contents", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/contents/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "contents", "1"]
             }
           },
           "response": []
