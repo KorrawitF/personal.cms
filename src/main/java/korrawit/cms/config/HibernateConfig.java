@@ -30,6 +30,7 @@ public class HibernateConfig {
                 .applySetting(AvailableSettings.HBM2DDL_AUTO, "update")
                 .applySetting(AvailableSettings.SHOW_SQL, "true")
                 .applySetting(AvailableSettings.FORMAT_SQL, "true")
+                .applySetting(AvailableSettings.JSON_FORMAT_MAPPER, new Jackson3JsonFormatMapper())
                 .build();
 
         try {
