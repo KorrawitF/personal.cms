@@ -10,6 +10,7 @@ import org.hibernate.cfg.AvailableSettings;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import korrawit.cms.infrastructure.persistence.model.ContactMethod;
 import korrawit.cms.infrastructure.persistence.model.Content;
 import korrawit.cms.infrastructure.persistence.model.Experiences;
 import korrawit.cms.infrastructure.persistence.model.Project;
@@ -36,7 +37,8 @@ public class HibernateConfig {
                     .addAnnotatedClass(Experiences.class)
                     .addAnnotatedClass(Project.class)
                     .addAnnotatedClass(WorkExperiences.class)
-                    .addAnnotatedClass(Content.class);
+                    .addAnnotatedClass(Content.class)
+                    .addAnnotatedClass(ContactMethod.class);
 
             return sources.buildMetadata().buildSessionFactory();
         } catch (Exception e) {

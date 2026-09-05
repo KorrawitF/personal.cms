@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "6f3a2b10-4c1a-4e2a-9b3e-2f7d1c8a9e10",
     "name": "Personal CMS API",
-    "description": "CRUD endpoints for Project, WorkExperiences, the SkillDomains aggregate (SkillDomains -> Skills -> Experiences), and Content.",
+    "description": "CRUD endpoints for Project, WorkExperiences, the SkillDomains aggregate (SkillDomains -> Skills -> Experiences), Content, and ContactMethod.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -339,6 +339,90 @@
               "raw": "{{baseUrl}}/api/contents/1",
               "host": ["{{baseUrl}}"],
               "path": ["api", "contents", "1"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Contact Methods",
+      "item": [
+        {
+          "name": "List all",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/contact-methods",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "contact-methods"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get one",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/contact-methods/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "contact-methods", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"slug\": \"email\",\n  \"name\": \"Email\",\n  \"handle\": \"korrawit.universal@gmail.com\",\n  \"summary\": \"Best way to reach me directly.\",\n  \"detail\": null,\n  \"status\": \"available\",\n  \"type\": \"email\",\n  \"href\": \"mailto:korrawit.universal@gmail.com\",\n  \"sortOrder\": 1\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/contact-methods",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "contact-methods"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"slug\": \"email\",\n  \"name\": \"Email\",\n  \"handle\": \"korrawit.universal@gmail.com\",\n  \"summary\": \"Best way to reach me directly - I check this daily.\",\n  \"detail\": null,\n  \"status\": \"available\",\n  \"type\": \"email\",\n  \"href\": \"mailto:korrawit.universal@gmail.com\",\n  \"sortOrder\": 1\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/contact-methods/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "contact-methods", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/contact-methods/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "contact-methods", "1"]
             }
           },
           "response": []
