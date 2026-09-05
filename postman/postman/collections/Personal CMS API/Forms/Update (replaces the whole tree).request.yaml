@@ -1,0 +1,53 @@
+$kind: http-request
+url: "{{baseUrl}}/api/forms/1"
+method: PUT
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "slug": "resume-request",
+      "submitLabel": "Send me the résumé",
+      "sendingLabel": "Sending…",
+      "note": "Your address is used for this one mail — nothing else.",
+      "optionalLabel": "optional",
+      "invalidMessage": "Check the highlighted fields and try again.",
+      "failedMessage": "The mail could not be sent just now. Try again in a moment.",
+      "successMessage": "{resume} is on its way to {email}. It carries my contact details too, so you can reply straight back.",
+      "fields": [
+        {
+          "id": 1,
+          "fieldKey": "name",
+          "kind": "text",
+          "label": "Your name",
+          "placeholder": "Jane Doe",
+          "required": true,
+          "requiredError": "Tell me who I am sending this to.",
+          "sortOrder": 1
+        },
+        {
+          "id": 2,
+          "fieldKey": "email",
+          "kind": "email",
+          "label": "Work email",
+          "placeholder": "jane@company.com",
+          "required": true,
+          "requiredError": "An email address is required — that is where the résumé goes.",
+          "invalidError": "That does not look like a valid email address.",
+          "sortOrder": 2
+        },
+        {
+          "id": 5,
+          "fieldKey": "message",
+          "kind": "textarea",
+          "label": "Anything I should know",
+          "placeholder": "A line about the role, the team or the timeline.",
+          "required": false,
+          "maxLength": 800,
+          "maxLengthError": "Keep it under 800 characters.",
+          "sortOrder": 3
+        }
+      ]
+    }
+order: 4000

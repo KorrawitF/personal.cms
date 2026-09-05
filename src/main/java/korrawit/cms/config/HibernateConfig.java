@@ -13,6 +13,8 @@ import org.springframework.context.annotation.Configuration;
 import korrawit.cms.infrastructure.persistence.model.ContactMethod;
 import korrawit.cms.infrastructure.persistence.model.Content;
 import korrawit.cms.infrastructure.persistence.model.Experiences;
+import korrawit.cms.infrastructure.persistence.model.FormFields;
+import korrawit.cms.infrastructure.persistence.model.Forms;
 import korrawit.cms.infrastructure.persistence.model.Project;
 import korrawit.cms.infrastructure.persistence.model.SkillDomains;
 import korrawit.cms.infrastructure.persistence.model.Skills;
@@ -38,7 +40,9 @@ public class HibernateConfig {
                     .addAnnotatedClass(Project.class)
                     .addAnnotatedClass(WorkExperiences.class)
                     .addAnnotatedClass(Content.class)
-                    .addAnnotatedClass(ContactMethod.class);
+                    .addAnnotatedClass(ContactMethod.class)
+                    .addAnnotatedClass(Forms.class)
+                    .addAnnotatedClass(FormFields.class);
 
             return sources.buildMetadata().buildSessionFactory();
         } catch (Exception e) {

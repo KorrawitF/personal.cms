@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "6f3a2b10-4c1a-4e2a-9b3e-2f7d1c8a9e10",
     "name": "Personal CMS API",
-    "description": "CRUD endpoints for Project, WorkExperiences, the SkillDomains aggregate (SkillDomains -> Skills -> Experiences), Content, and ContactMethod.",
+    "description": "CRUD endpoints for Project, WorkExperiences, the SkillDomains aggregate (SkillDomains -> Skills -> Experiences), Content, ContactMethod, and the Forms aggregate (Forms -> FormFields).",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -423,6 +423,90 @@
               "raw": "{{baseUrl}}/api/contact-methods/1",
               "host": ["{{baseUrl}}"],
               "path": ["api", "contact-methods", "1"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Forms",
+      "item": [
+        {
+          "name": "List all",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/forms",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "forms"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get one",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/forms/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "forms", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create (with nested fields)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"slug\": \"resume-request\",\n  \"submitLabel\": \"Send me the résumé\",\n  \"sendingLabel\": \"Sending…\",\n  \"note\": \"Your address is used for this one mail — nothing else.\",\n  \"optionalLabel\": \"optional\",\n  \"invalidMessage\": \"Check the highlighted fields and try again.\",\n  \"failedMessage\": \"The mail could not be sent just now. Try again in a moment.\",\n  \"successMessage\": \"{resume} is on its way to {email}. It carries my contact details too, so you can reply straight back.\",\n  \"fields\": [\n    {\n      \"fieldKey\": \"name\",\n      \"kind\": \"text\",\n      \"label\": \"Your name\",\n      \"placeholder\": \"Jane Doe\",\n      \"required\": true,\n      \"requiredError\": \"Tell me who I am sending this to.\",\n      \"sortOrder\": 1\n    },\n    {\n      \"fieldKey\": \"email\",\n      \"kind\": \"email\",\n      \"label\": \"Email\",\n      \"placeholder\": \"jane@company.com\",\n      \"required\": true,\n      \"requiredError\": \"An email address is required — that is where the résumé goes.\",\n      \"invalidError\": \"That does not look like a valid email address.\",\n      \"sortOrder\": 2\n    },\n    {\n      \"fieldKey\": \"company\",\n      \"kind\": \"text\",\n      \"label\": \"Company\",\n      \"placeholder\": \"Where you are writing from\",\n      \"required\": false,\n      \"sortOrder\": 3\n    },\n    {\n      \"fieldKey\": \"role\",\n      \"kind\": \"text\",\n      \"label\": \"Role you are hiring for\",\n      \"placeholder\": \"Backend Engineer\",\n      \"required\": false,\n      \"sortOrder\": 4\n    },\n    {\n      \"fieldKey\": \"message\",\n      \"kind\": \"textarea\",\n      \"label\": \"Anything I should know\",\n      \"placeholder\": \"A line about the role, the team or the timeline.\",\n      \"required\": false,\n      \"maxLength\": 500,\n      \"maxLengthError\": \"Keep it under 500 characters.\",\n      \"sortOrder\": 5\n    }\n  ]\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/forms",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "forms"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update (replaces the whole tree)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"slug\": \"resume-request\",\n  \"submitLabel\": \"Send me the résumé\",\n  \"sendingLabel\": \"Sending…\",\n  \"note\": \"Your address is used for this one mail — nothing else.\",\n  \"optionalLabel\": \"optional\",\n  \"invalidMessage\": \"Check the highlighted fields and try again.\",\n  \"failedMessage\": \"The mail could not be sent just now. Try again in a moment.\",\n  \"successMessage\": \"{resume} is on its way to {email}. It carries my contact details too, so you can reply straight back.\",\n  \"fields\": [\n    {\n      \"id\": 1,\n      \"fieldKey\": \"name\",\n      \"kind\": \"text\",\n      \"label\": \"Your name\",\n      \"placeholder\": \"Jane Doe\",\n      \"required\": true,\n      \"requiredError\": \"Tell me who I am sending this to.\",\n      \"sortOrder\": 1\n    },\n    {\n      \"id\": 2,\n      \"fieldKey\": \"email\",\n      \"kind\": \"email\",\n      \"label\": \"Work email\",\n      \"placeholder\": \"jane@company.com\",\n      \"required\": true,\n      \"requiredError\": \"An email address is required — that is where the résumé goes.\",\n      \"invalidError\": \"That does not look like a valid email address.\",\n      \"sortOrder\": 2\n    },\n    {\n      \"id\": 5,\n      \"fieldKey\": \"message\",\n      \"kind\": \"textarea\",\n      \"label\": \"Anything I should know\",\n      \"placeholder\": \"A line about the role, the team or the timeline.\",\n      \"required\": false,\n      \"maxLength\": 800,\n      \"maxLengthError\": \"Keep it under 800 characters.\",\n      \"sortOrder\": 3\n    }\n  ]\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/forms/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "forms", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete (cascades fields)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/forms/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "forms", "1"]
             }
           },
           "response": []
