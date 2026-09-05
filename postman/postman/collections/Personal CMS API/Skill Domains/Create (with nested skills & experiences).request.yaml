@@ -12,6 +12,7 @@ body:
       "summary": "Server-side engineering skills",
       "skills": [
         {
+          "name": "Spring Boot",
           "level": 4,
           "summary": "Building REST APIs with Spring Boot",
           "tools": ["Spring Boot", "Hibernate", "Maven"],

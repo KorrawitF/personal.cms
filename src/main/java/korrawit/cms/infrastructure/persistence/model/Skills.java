@@ -21,6 +21,8 @@ public class Skills {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private String name;
+
     @ManyToOne
     @JoinColumn(name = "domain_id", nullable = false)
     private SkillDomains domain;
@@ -49,9 +51,10 @@ public class Skills {
     protected Skills() {
     }
 
-    public Skills(Integer id, SkillDomains domain, Integer level, String summary, String[] tools, String[] useCases,
-            String parent, String icon, Instant createdAt, Instant updatedAt) {
+    public Skills(Integer id, String name, SkillDomains domain, Integer level, String summary, String[] tools,
+            String[] useCases, String parent, String icon, Instant createdAt, Instant updatedAt) {
         this.id = id;
+        this.name = name;
         this.domain = domain;
         this.level = level;
         this.summary = summary;
@@ -65,6 +68,10 @@ public class Skills {
 
     public Integer getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public SkillDomains getDomain() {

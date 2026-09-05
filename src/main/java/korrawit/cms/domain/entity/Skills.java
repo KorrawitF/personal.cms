@@ -4,6 +4,7 @@ import java.time.Instant;
 
 public class Skills {
     private Integer id;
+    private String name;
     private Integer domainId;
     private Integer level;
     private String summary;
@@ -18,9 +19,10 @@ public class Skills {
     public Skills() {
     }
 
-    public Skills(Integer id, Integer domainId, Integer level, String summary, Experiences[] experiences,
+    public Skills(Integer id, String name, Integer domainId, Integer level, String summary, Experiences[] experiences,
             String[] tools, String[] useCases, String parent, String icon, Instant createdAt, Instant updatedAt) {
         this.id = id;
+        this.name = name;
         this.domainId = domainId;
         this.level = level;
         this.summary = summary;
@@ -39,6 +41,14 @@ public class Skills {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getDomainId() {

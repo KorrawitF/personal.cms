@@ -215,7 +215,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Backend Development\",\n  \"color\": \"#4287f5\",\n  \"summary\": \"Server-side engineering skills\",\n  \"skills\": [\n    {\n      \"level\": 4,\n      \"summary\": \"Building REST APIs with Spring Boot\",\n      \"tools\": [\"Spring Boot\", \"Hibernate\", \"Maven\"],\n      \"useCases\": [\"CRUD APIs\", \"Microservices\"],\n      \"parent\": null,\n      \"icon\": \"spring\",\n      \"experiences\": [\n        {\n          \"title\": \"CMS REST API\",\n          \"org\": \"Personal project\",\n          \"detail\": \"Designed the aggregate-root CRUD API.\"\n        }\n      ]\n    }\n  ]\n}",
+              "raw": "{\n  \"name\": \"Backend Development\",\n  \"color\": \"#4287f5\",\n  \"summary\": \"Server-side engineering skills\",\n  \"skills\": [\n    {\n      \"name\": \"Spring Boot\",\n      \"level\": 4,\n      \"summary\": \"Building REST APIs with Spring Boot\",\n      \"tools\": [\"Spring Boot\", \"Hibernate\", \"Maven\"],\n      \"useCases\": [\"CRUD APIs\", \"Microservices\"],\n      \"parent\": null,\n      \"icon\": \"spring\",\n      \"experiences\": [\n        {\n          \"title\": \"CMS REST API\",\n          \"org\": \"Personal project\",\n          \"detail\": \"Designed the aggregate-root CRUD API.\"\n        }\n      ]\n    }\n  ]\n}",
               "options": { "raw": { "language": "json" } }
             },
             "url": {
@@ -235,7 +235,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"name\": \"Backend Development\",\n  \"color\": \"#4287f5\",\n  \"summary\": \"Server-side and infrastructure engineering skills\",\n  \"skills\": [\n    {\n      \"id\": 1,\n      \"level\": 5,\n      \"summary\": \"Building REST APIs with Spring Boot\",\n      \"tools\": [\"Spring Boot\", \"Hibernate\", \"Maven\"],\n      \"useCases\": [\"CRUD APIs\", \"Microservices\"],\n      \"parent\": null,\n      \"icon\": \"spring\",\n      \"experiences\": [\n        {\n          \"id\": 1,\n          \"title\": \"CMS REST API\",\n          \"org\": \"Personal project\",\n          \"detail\": \"Designed and shipped the aggregate-root CRUD API.\"\n        }\n      ]\n    }\n  ]\n}",
+              "raw": "{\n  \"name\": \"Backend Development\",\n  \"color\": \"#4287f5\",\n  \"summary\": \"Server-side and infrastructure engineering skills\",\n  \"skills\": [\n    {\n      \"id\": 1,\n      \"name\": \"Spring Boot\",\n      \"level\": 5,\n      \"summary\": \"Building REST APIs with Spring Boot\",\n      \"tools\": [\"Spring Boot\", \"Hibernate\", \"Maven\"],\n      \"useCases\": [\"CRUD APIs\", \"Microservices\"],\n      \"parent\": null,\n      \"icon\": \"spring\",\n      \"experiences\": [\n        {\n          \"id\": 1,\n          \"title\": \"CMS REST API\",\n          \"org\": \"Personal project\",\n          \"detail\": \"Designed and shipped the aggregate-root CRUD API.\"\n        }\n      ]\n    }\n  ]\n}",
               "options": { "raw": { "language": "json" } }
             },
             "url": {

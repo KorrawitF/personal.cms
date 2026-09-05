@@ -17,9 +17,9 @@ public final class SkillsMapper {
         Integer domainId = entity.getDomain() != null ? entity.getDomain().getId() : null;
         Experiences[] experiences = entity.getExperiences() == null ? new Experiences[0]
                 : entity.getExperiences().stream().map(ExperiencesMapper::toDomain).toArray(Experiences[]::new);
-        return new Skills(entity.getId(), domainId, entity.getLevel(), entity.getSummary(), experiences,
-                entity.getTools(), entity.getUseCases(), entity.getParent(), entity.getIcon(), entity.getCreatedAt(),
-                entity.getUpdatedAt());
+        return new Skills(entity.getId(), entity.getName(), domainId, entity.getLevel(), entity.getSummary(),
+                experiences, entity.getTools(), entity.getUseCases(), entity.getParent(), entity.getIcon(),
+                entity.getCreatedAt(), entity.getUpdatedAt());
     }
 
     public static korrawit.cms.infrastructure.persistence.model.Skills toEntity(Skills domain,
@@ -28,8 +28,8 @@ public final class SkillsMapper {
             return null;
         }
         korrawit.cms.infrastructure.persistence.model.Skills entity = new korrawit.cms.infrastructure.persistence.model.Skills(
-                domain.getId(), domainEntity, domain.getLevel(), domain.getSummary(), domain.getTools(),
-                domain.getUseCases(), domain.getParent(), domain.getIcon(), domain.getCreatedAt(),
+                domain.getId(), domain.getName(), domainEntity, domain.getLevel(), domain.getSummary(),
+                domain.getTools(), domain.getUseCases(), domain.getParent(), domain.getIcon(), domain.getCreatedAt(),
                 domain.getUpdatedAt());
         if (domain.getExperiences() != null) {
             entity.setExperiences(
