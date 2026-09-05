@@ -13,6 +13,7 @@ body:
       "skills": [
         {
           "id": 1,
+          "name": "Spring Boot",
           "level": 5,
           "summary": "Building REST APIs with Spring Boot",
           "tools": ["Spring Boot", "Hibernate", "Maven"],
