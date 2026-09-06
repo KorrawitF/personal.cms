@@ -20,6 +20,12 @@ public class MailTransaction {
     @Column(name = "receiver_hash", nullable = false)
     private String receiverHash;
 
+    @Column(name = "subject", nullable = false)
+    private String subject;
+
+    @Column(name = "content", nullable = false, columnDefinition = "TEXT")
+    private String content;
+
     @Column(name = "created_at", nullable = false)
     private Instant createdAt;
 
@@ -29,9 +35,12 @@ public class MailTransaction {
     protected MailTransaction() {
     }
 
-    public MailTransaction(Integer id, String receiverHash, Instant createdAt, Instant updatedAt) {
+    public MailTransaction(Integer id, String receiverHash, String subject, String content, Instant createdAt,
+            Instant updatedAt) {
         this.id = id;
         this.receiverHash = receiverHash;
+        this.subject = subject;
+        this.content = content;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -46,6 +55,22 @@ public class MailTransaction {
 
     public void setReceiverHash(String receiverHash) {
         this.receiverHash = receiverHash;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Instant getCreatedAt() {

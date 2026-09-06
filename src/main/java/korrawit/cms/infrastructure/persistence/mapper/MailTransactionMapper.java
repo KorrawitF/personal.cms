@@ -11,8 +11,8 @@ public final class MailTransactionMapper {
         if (entity == null) {
             return null;
         }
-        return new MailTransaction(entity.getId(), entity.getReceiverHash(), entity.getCreatedAt(),
-                entity.getUpdatedAt());
+        return new MailTransaction(entity.getId(), entity.getReceiverHash(), entity.getSubject(),
+                entity.getContent(), entity.getCreatedAt(), entity.getUpdatedAt());
     }
 
     public static korrawit.cms.infrastructure.persistence.model.MailTransaction toEntity(MailTransaction domain) {
@@ -20,6 +20,7 @@ public final class MailTransactionMapper {
             return null;
         }
         return new korrawit.cms.infrastructure.persistence.model.MailTransaction(domain.getId(),
-                domain.getReceiverHash(), domain.getCreatedAt(), domain.getUpdatedAt());
+                domain.getReceiverHash(), domain.getSubject(), domain.getContent(), domain.getCreatedAt(),
+                domain.getUpdatedAt());
     }
 }

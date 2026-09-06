@@ -50,7 +50,7 @@ public class MailService {
         }
 
         Instant now = Instant.now();
-        mailTransactionRepository.save(new MailTransaction(null, hash(to), now, now));
+        mailTransactionRepository.save(new MailTransaction(null, hash(to), subject, body, now, now));
     }
 
     private static String hash(String value) {
