@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import korrawit.cms.domain.entity.MailTransaction;
@@ -34,6 +35,7 @@ public class MailService {
         this.fromAddress = fromAddress;
     }
 
+    @Async
     public void send(String to, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
         if (fromAddress != null && !fromAddress.isBlank()) {
