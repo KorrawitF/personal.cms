@@ -112,13 +112,16 @@ public class FormsService {
     }
 
     private String buildBody(Forms form, Map<String, String> values) {
-        StringBuilder body = new StringBuilder("New submission for form \"").append(form.getSlug()).append("\"\n\n");
+        StringBuilder body = new StringBuilder("Hi,\n\n")
+                .append("You've received a new submission on the \"").append(form.getSlug())
+                .append("\" form. Here are the details:\n\n");
         if (form.getFields() != null) {
             for (FormFields field : form.getFields()) {
                 String value = values == null ? null : values.get(field.getFieldKey());
                 body.append(field.getLabel()).append(": ").append(value == null ? "" : value).append('\n');
             }
         }
+        body.append("\nBest,\nKorrawit's Personal CMS");
         return body.toString();
     }
 
