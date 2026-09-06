@@ -15,6 +15,7 @@ import korrawit.cms.infrastructure.persistence.model.Content;
 import korrawit.cms.infrastructure.persistence.model.Experiences;
 import korrawit.cms.infrastructure.persistence.model.FormFields;
 import korrawit.cms.infrastructure.persistence.model.Forms;
+import korrawit.cms.infrastructure.persistence.model.MailTransaction;
 import korrawit.cms.infrastructure.persistence.model.Project;
 import korrawit.cms.infrastructure.persistence.model.SkillDomains;
 import korrawit.cms.infrastructure.persistence.model.Skills;
@@ -43,7 +44,8 @@ public class HibernateConfig {
                     .addAnnotatedClass(Content.class)
                     .addAnnotatedClass(ContactMethod.class)
                     .addAnnotatedClass(Forms.class)
-                    .addAnnotatedClass(FormFields.class);
+                    .addAnnotatedClass(FormFields.class)
+                    .addAnnotatedClass(MailTransaction.class);
 
             return sources.buildMetadata().buildSessionFactory();
         } catch (Exception e) {

@@ -510,6 +510,26 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "Submit (sends mail)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Jane Doe\",\n  \"email\": \"jane@company.com\",\n  \"company\": \"Acme\",\n  \"role\": \"Backend Engineer\",\n  \"message\": \"Loved your portfolio, let's talk.\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/forms/resume-request/submissions",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "forms", "resume-request", "submissions"]
+            }
+          },
+          "response": []
         }
       ]
     }

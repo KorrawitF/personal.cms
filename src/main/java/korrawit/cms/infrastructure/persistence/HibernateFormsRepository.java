@@ -27,6 +27,16 @@ public class HibernateFormsRepository implements FormsRepository {
     }
 
     @Override
+    public Optional<Forms> findBySlug(String slug) {
+        return sessionFactory.fromTransaction(session -> session
+                .createSelectionQuery("from Forms where slug = :slug",
+                        korrawit.cms.infrastructure.persistence.model.Forms.class)
+                .setParameter("slug", slug)
+                .uniqueResultOptional()
+                .map(FormsMapper::toDomain));
+    }
+
+    @Override
     public List<Forms> findAll() {
         return sessionFactory.fromTransaction(session -> session
                 .createSelectionQuery("from Forms", korrawit.cms.infrastructure.persistence.model.Forms.class)

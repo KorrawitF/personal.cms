@@ -36,6 +36,7 @@ Domain entities and persistence models are kept separate on purpose, with mapper
 | Projects | `/api/projects` | Portfolio projects (tech stack, highlights, links, status, dates) |
 | Skill Domains | `/api/skill-domains` | Grouped skill categories, each with nested skills |
 | Work Experiences | `/api/work-experiences` | Job history (title, company, tech stack, dates) |
+| Forms | `/api/forms` | Dynamic form definitions (labels, copy, nested fields) |
 
 Each resource exposes standard CRUD operations:
 
@@ -44,6 +45,16 @@ Each resource exposes standard CRUD operations:
 - `POST /api/{resource}` — create
 - `PUT /api/{resource}/{id}` — update
 - `DELETE /api/{resource}/{id}` — delete
+
+### Form submissions (mail)
+
+`POST /api/forms/{slug}/submissions` validates the posted `fieldKey -> value` map against
+that form's fields (required / max length) and emails the result to the site owner via SMTP.
+
+- Body: `{ "fieldKey": "value", ... }`
+- `201 Created`: `{ "id": "...", "to": "...", "deliveredAt": "..." }`
+- `400 Bad Request`: `{ "errors": { "fieldKey": "message" } }` on validation failure
+- `502 Bad Gateway` if the mail could not be sent
 
 A Postman collection is available under [`postman/`](postman/personal-cms.postman_collection.json) for exploring and testing the API.
 
@@ -67,6 +78,12 @@ The application reads database settings from environment variables (or a `.env` 
 | `DATABASE_NAME` | `cms` | Database name |
 | `DATABASE_MODE` | `disable` | SSL mode |
 | `DATABASE_SSL` | `false` | Enable SSL |
+| `MAIL_HOST` | `smtp.gmail.com` | SMTP host used to send form-submission mail |
+| `MAIL_PORT` | `587` | SMTP port |
+| `MAIL_USERNAME` | *(empty)* | SMTP auth username |
+| `MAIL_PASSWORD` | *(empty)* | SMTP auth password (an app password for Gmail) |
+| `MAIL_FROM` | value of `MAIL_USERNAME` | Sender address on outgoing mail |
+| `MAIL_TO` | `korrawit.universal@gmail.com` | Site-owner address that receives form submissions |
 
 ### Run
 

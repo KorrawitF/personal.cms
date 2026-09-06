@@ -9,6 +9,8 @@ public interface FormsRepository {
 
     Optional<Forms> findById(int id);
 
+    Optional<Forms> findBySlug(String slug);
+
     List<Forms> findAll();
 
     Forms save(Forms form);
