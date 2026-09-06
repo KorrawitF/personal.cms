@@ -83,7 +83,6 @@ The application reads database settings from environment variables (or a `.env` 
 | `MAIL_USERNAME` | *(empty)* | SMTP auth username |
 | `MAIL_PASSWORD` | *(empty)* | SMTP auth password (an app password for Gmail) |
 | `MAIL_FROM` | value of `MAIL_USERNAME` | Sender address on outgoing mail |
-| `MAIL_TO` | `korrawit.universal@gmail.com` | Site-owner address that receives form submissions |
 
 ### Run
 

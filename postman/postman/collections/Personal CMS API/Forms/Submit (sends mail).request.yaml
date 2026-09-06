@@ -1,0 +1,16 @@
+$kind: http-request
+url: "{{baseUrl}}/api/forms/resume-request/submissions"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Jane Doe",
+      "email": "jane@company.com",
+      "company": "Acme",
+      "role": "Backend Engineer",
+      "message": "Loved your portfolio, let's talk."
+    }
+order: 6000

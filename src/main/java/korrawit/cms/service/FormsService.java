@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import korrawit.cms.domain.dto.FormSubmissionResult;
@@ -23,13 +22,10 @@ public class FormsService {
 
     private final FormsRepository formsRepository;
     private final MailService mailService;
-    private final String recipient;
 
-    public FormsService(FormsRepository formsRepository, MailService mailService,
-            @Value("${app.mail.to}") String recipient) {
+    public FormsService(FormsRepository formsRepository, MailService mailService) {
         this.formsRepository = formsRepository;
         this.mailService = mailService;
-        this.recipient = recipient;
     }
 
     public List<Forms> findAll() {
@@ -70,10 +66,25 @@ public class FormsService {
                 .orElseThrow(() -> new ResourceNotFoundException("Form not found: " + slug));
         validate(form, values);
 
+        String recipient = resolveRecipient(form, values);
         String body = buildBody(form, values);
         mailService.send(recipient, "New \"%s\" submission".formatted(slug), body);
 
         return new FormSubmissionResult(UUID.randomUUID().toString(), recipient, Instant.now());
+    }
+
+    private String resolveRecipient(Forms form, Map<String, String> values) {
+        if (form.getFields() != null) {
+            for (FormFields field : form.getFields()) {
+                if ("email".equalsIgnoreCase(field.getKind())) {
+                    String value = values == null ? null : values.get(field.getFieldKey());
+                    if (value != null && !value.isBlank()) {
+                        return value;
+                    }
+                }
+            }
+        }
+        throw new IllegalStateException("Form \"" + form.getSlug() + "\" has no email field to send the reply to");
     }
 
     private void validate(Forms form, Map<String, String> values) {
