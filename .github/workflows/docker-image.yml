@@ -1,5 +1,8 @@
 name: Docker Image CI
 
+env:
+  REGISTRY: ghcr.io
+
 on:
   push:
     branches: [ "main" ]
@@ -10,11 +13,30 @@ on:
 
 jobs:
 
-  build:
-
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag personal.cms:$(date +%s)
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v3
+      with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{github.actor}}
+          password: ${{secrets.GITHUB_TOKEN}}
+          
+    - name: Extract metadata (tags, labels) for Docker
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+          images: ${{ env.REGISTRY }}/${{ github.repository }}
+          tags: |
+            type=raw,value=1.0.0,enable={{is_default_branch}}
+
+    - name: Build and Push Image
+      uses: docker/build-push-action@v5
+      with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
