@@ -1,0 +1,19 @@
+services:
+  personal.cms:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: ghcr.io/korrawitf/personal.cms:1.0.0
+    container_name: personal.cms
+    environment:
+      - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_PORT=${DATABASE_PORT}
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_PASS=${DATABASE_PASS}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_MODE=${DATABASE_MODE}
+      - DATABASE_SSL=${DATABASE_SSL}
+      - MAIL_HOST=${MAIL_HOST}
+      - MAIL_USERNAME=${MAIL_USERNAME}
+      - MAIL_PASSWORD=${MAIL_PASSWORD}
+      - MAIL_FROM=${MAIL_FROM}
