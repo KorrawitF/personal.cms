@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{baseUrl}}/api/contact-methods"
+method: GET
+order: 1000

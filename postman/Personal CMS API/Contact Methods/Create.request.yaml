@@ -1,0 +1,20 @@
+$kind: http-request
+url: "{{baseUrl}}/api/contact-methods"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "slug": "email",
+      "name": "Email",
+      "handle": "korrawit.universal@gmail.com",
+      "summary": "Best way to reach me directly.",
+      "detail": null,
+      "status": "available",
+      "type": "email",
+      "href": "mailto:korrawit.universal@gmail.com",
+      "sortOrder": 1
+    }
+order: 3000

@@ -4,7 +4,7 @@ workspace:
 
 localResources:
   collections:
-    - ../personal-cms.postman_collection.json
+    - ../Personal CMS API
 
 # Each entry here maps a local resource to one or more corresponding objects in Postman Cloud
 

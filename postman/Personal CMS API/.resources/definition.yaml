@@ -1,0 +1,4 @@
+$kind: collection
+description: CRUD endpoints for Project, WorkExperiences, the SkillDomains aggregate (SkillDomains -> Skills -> Experiences), Content, ContactMethod, the Forms aggregate (Forms -> FormFields), and Media (S3-backed file retrieval).
+variables:
+  baseUrl: http://localhost:8080

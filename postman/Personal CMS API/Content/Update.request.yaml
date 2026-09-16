@@ -1,0 +1,17 @@
+$kind: http-request
+url: "{{baseUrl}}/api/contents/1"
+method: PUT
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "page": "home",
+      "content": {
+        "heading": "Welcome to my portfolio",
+        "subheading": "Backend engineer building things on the JVM",
+        "ctaLabel": "See what I've shipped"
+      }
+    }
+order: 4000

@@ -1,0 +1,66 @@
+$kind: http-request
+url: "{{baseUrl}}/api/forms"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "slug": "resume-request",
+      "submitLabel": "Send me the résumé",
+      "sendingLabel": "Sending…",
+      "note": "Your address is used for this one mail — nothing else.",
+      "optionalLabel": "optional",
+      "invalidMessage": "Check the highlighted fields and try again.",
+      "failedMessage": "The mail could not be sent just now. Try again in a moment.",
+      "successMessage": "{resume} is on its way to {email}. It carries my contact details too, so you can reply straight back.",
+      "fields": [
+        {
+          "fieldKey": "name",
+          "kind": "text",
+          "label": "Your name",
+          "placeholder": "Jane Doe",
+          "required": true,
+          "requiredError": "Tell me who I am sending this to.",
+          "sortOrder": 1
+        },
+        {
+          "fieldKey": "email",
+          "kind": "email",
+          "label": "Email",
+          "placeholder": "jane@company.com",
+          "required": true,
+          "requiredError": "An email address is required — that is where the résumé goes.",
+          "invalidError": "That does not look like a valid email address.",
+          "sortOrder": 2
+        },
+        {
+          "fieldKey": "company",
+          "kind": "text",
+          "label": "Company",
+          "placeholder": "Where you are writing from",
+          "required": false,
+          "sortOrder": 3
+        },
+        {
+          "fieldKey": "role",
+          "kind": "text",
+          "label": "Role you are hiring for",
+          "placeholder": "Backend Engineer",
+          "required": false,
+          "sortOrder": 4
+        },
+        {
+          "fieldKey": "message",
+          "kind": "textarea",
+          "label": "Anything I should know",
+          "placeholder": "A line about the role, the team or the timeline.",
+          "required": false,
+          "maxLength": 500,
+          "maxLengthError": "Keep it under 500 characters.",
+          "sortOrder": 5
+        }
+      ]
+    }
+order: 3000

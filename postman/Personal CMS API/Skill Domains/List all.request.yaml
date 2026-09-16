@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{baseUrl}}/api/skill-domains"
+method: GET
+order: 1000

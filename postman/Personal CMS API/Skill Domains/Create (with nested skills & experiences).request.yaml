@@ -1,0 +1,32 @@
+$kind: http-request
+url: "{{baseUrl}}/api/skill-domains"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Backend Development",
+      "color": "#4287f5",
+      "summary": "Server-side engineering skills",
+      "skills": [
+        {
+          "name": "Spring Boot",
+          "level": 4,
+          "summary": "Building REST APIs with Spring Boot",
+          "tools": ["Spring Boot", "Hibernate", "Maven"],
+          "useCases": ["CRUD APIs", "Microservices"],
+          "parent": null,
+          "icon": "spring",
+          "experiences": [
+            {
+              "title": "CMS REST API",
+              "org": "Personal project",
+              "detail": "Designed the aggregate-root CRUD API."
+            }
+          ]
+        }
+      ]
+    }
+order: 3000
