@@ -37,7 +37,7 @@ Domain entities and persistence models are kept separate on purpose, with mapper
 | Skill Domains | `/api/skill-domains` | Grouped skill categories, each with nested skills |
 | Work Experiences | `/api/work-experiences` | Job history (title, company, tech stack, dates) |
 | Forms | `/api/forms` | Dynamic form definitions (labels, copy, nested fields) |
-| Media | `/api/media/{key}` | Streams a media file (e.g. image) from S3 by object key |
+| Media | `/api/media` | Media records — DB metadata that map an id to an S3 object key |
 
 Each resource exposes standard CRUD operations:
 
@@ -93,12 +93,19 @@ The application reads database settings from environment variables (or a `.env` 
 
 ### Media
 
-`GET /api/media/{key}` streams a file straight from the configured S3 bucket by its object key
-(e.g. `GET /api/media/images/hero.png` for a stored key of `images/hero.png`).
+The API never accepts a raw S3 key from a client. Media is modeled as a two-step, air-gapped
+lookup: a `media_records` DB row maps an opaque numeric id to an S3 object key, and only the
+server-side lookup of that row is allowed to read the key and reach into S3.
 
-- `200 OK` with the raw file bytes and its stored `Content-Type`
-- `404 Not Found` if no object exists under that key
-- `502 Bad Gateway` if S3 could not be reached
+- `GET /api/media` / `GET /api/media/{id}` — list/get media record metadata (`key`, `fileName`, `contentType`, `size`)
+- `POST /api/media` / `PUT /api/media/{id}` — register or update a record pointing at an S3 object
+  (the object itself is expected to already exist in the bucket — this API does not upload to S3)
+- `DELETE /api/media/{id}` — removes the DB record only; the underlying S3 object is untouched
+- `GET /api/media/{id}/file` — resolves the id to its DB record, then streams the file bytes from
+  S3 using the stored key
+  - `200 OK` with the raw bytes and the record's `Content-Type` (falls back to the object's own content type)
+  - `404 Not Found` if the record doesn't exist, or its key has no matching object in S3
+  - `502 Bad Gateway` if S3 could not be reached
 
 ### Run
 

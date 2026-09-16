@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{baseUrl}}/api/media/1"
+method: PUT
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "key": "images/hero.png",
+      "fileName": "hero-v2.png",
+      "contentType": "image/png",
+      "size": 204800
+    }
+order: 4000

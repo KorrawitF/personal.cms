@@ -33,7 +33,7 @@ public class S3MediaRepository implements MediaRepository {
             GetObjectResponse metadata = object.response();
             String contentType = metadata.contentType() != null ? metadata.contentType() : "application/octet-stream";
             long contentLength = metadata.contentLength() != null ? metadata.contentLength() : -1L;
-            return Optional.of(new MediaObject(key, contentType, contentLength, object));
+            return Optional.of(new MediaObject(key, null, contentType, contentLength, object));
         } catch (NoSuchKeyException e) {
             return Optional.empty();
         }
