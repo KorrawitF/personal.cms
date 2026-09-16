@@ -37,6 +37,7 @@ Domain entities and persistence models are kept separate on purpose, with mapper
 | Skill Domains | `/api/skill-domains` | Grouped skill categories, each with nested skills |
 | Work Experiences | `/api/work-experiences` | Job history (title, company, tech stack, dates) |
 | Forms | `/api/forms` | Dynamic form definitions (labels, copy, nested fields) |
+| Media | `/api/media/{key}` | Streams a media file (e.g. image) from S3 by object key |
 
 Each resource exposes standard CRUD operations:
 
@@ -83,6 +84,21 @@ The application reads database settings from environment variables (or a `.env` 
 | `MAIL_USERNAME` | *(empty)* | SMTP auth username |
 | `MAIL_PASSWORD` | *(empty)* | SMTP auth password (an app password for Gmail) |
 | `MAIL_FROM` | value of `MAIL_USERNAME` | Sender address on outgoing mail |
+| `S3_BUCKET` | *(empty)* | S3 bucket that media files are read from |
+| `S3_REGION` | `us-east-1` | AWS region of the bucket |
+| `S3_ENDPOINT` | *(empty)* | Optional endpoint override, for S3-compatible services (e.g. MinIO) |
+| `S3_ACCESS_KEY` | *(empty)* | Access key; if empty, falls back to the default AWS credentials chain |
+| `S3_SECRET_KEY` | *(empty)* | Secret key, used together with `S3_ACCESS_KEY` |
+| `S3_PATH_STYLE_ACCESS` | `false` | Enable path-style bucket access (usually required for S3-compatible services) |
+
+### Media
+
+`GET /api/media/{key}` streams a file straight from the configured S3 bucket by its object key
+(e.g. `GET /api/media/images/hero.png` for a stored key of `images/hero.png`).
+
+- `200 OK` with the raw file bytes and its stored `Content-Type`
+- `404 Not Found` if no object exists under that key
+- `502 Bad Gateway` if S3 could not be reached
 
 ### Run
 

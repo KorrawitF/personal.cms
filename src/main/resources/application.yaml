@@ -28,6 +28,13 @@ server:
 app:
   mail:
     from: ${MAIL_FROM:${MAIL_USERNAME:}}
+  s3:
+    bucket: ${S3_BUCKET:}
+    region: ${S3_REGION:us-east-1}
+    endpoint: ${S3_ENDPOINT:}
+    access-key: ${S3_ACCESS_KEY:}
+    secret-key: ${S3_SECRET_KEY:}
+    path-style-access: ${S3_PATH_STYLE_ACCESS:false}
 
 logging:
   level:

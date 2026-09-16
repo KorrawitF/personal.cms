@@ -24,4 +24,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleMailDelivery(MailDeliveryException e) {
         return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(e.getMessage());
     }
+
+    @ExceptionHandler(MediaStorageException.class)
+    public ResponseEntity<String> handleMediaStorage(MediaStorageException e) {
+        return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(e.getMessage());
+    }
 }

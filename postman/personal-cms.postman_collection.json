@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "6f3a2b10-4c1a-4e2a-9b3e-2f7d1c8a9e10",
     "name": "Personal CMS API",
-    "description": "CRUD endpoints for Project, WorkExperiences, the SkillDomains aggregate (SkillDomains -> Skills -> Experiences), Content, ContactMethod, and the Forms aggregate (Forms -> FormFields).",
+    "description": "CRUD endpoints for Project, WorkExperiences, the SkillDomains aggregate (SkillDomains -> Skills -> Experiences), Content, ContactMethod, the Forms aggregate (Forms -> FormFields), and Media (S3-backed file retrieval).",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -527,6 +527,24 @@
               "raw": "{{baseUrl}}/api/forms/resume-request/submissions",
               "host": ["{{baseUrl}}"],
               "path": ["api", "forms", "resume-request", "submissions"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Media",
+      "item": [
+        {
+          "name": "Get by key",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/media/images/hero.png",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "media", "images", "hero.png"]
             }
           },
           "response": []
