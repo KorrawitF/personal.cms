@@ -22,6 +22,7 @@ public class S3Config {
 
     private static final Logger log = LoggerFactory.getLogger(S3Config.class);
 
+    @SuppressWarnings("deprecation")
     @Bean(destroyMethod = "close")
     S3Client s3Client(
             @Value("${app.s3.region}") String region,

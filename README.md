@@ -50,7 +50,8 @@ Each resource exposes standard CRUD operations:
 ### Form submissions (mail)
 
 `POST /api/forms/{slug}/submissions` validates the posted `fieldKey -> value` map against
-that form's fields (required / max length) and emails the result to the site owner via SMTP.
+that form's fields (required / max length) and emails the result to the site owner via
+Outlook/Microsoft 365 SMTP, authenticating with OAuth2 (XOAUTH2) instead of a username/password.
 
 - Body: `{ "fieldKey": "value", ... }`
 - `201 Created`: `{ "id": "...", "to": "...", "deliveredAt": "..." }`
@@ -79,17 +80,26 @@ The application reads database settings from environment variables (or a `.env` 
 | `DATABASE_NAME` | `cms` | Database name |
 | `DATABASE_MODE` | `disable` | SSL mode |
 | `DATABASE_SSL` | `false` | Enable SSL |
-| `MAIL_HOST` | `smtp.gmail.com` | SMTP host used to send form-submission mail |
+| `MAIL_HOST` | `smtp-mail.outlook.com` | SMTP host used to send form-submission mail |
 | `MAIL_PORT` | `587` | SMTP port |
-| `MAIL_USERNAME` | *(empty)* | SMTP auth username |
-| `MAIL_PASSWORD` | *(empty)* | SMTP auth password (an app password for Gmail) |
-| `MAIL_FROM` | value of `MAIL_USERNAME` | Sender address on outgoing mail |
+| `MAIL_CLIENT_ID` | *(empty)* | Azure app registration's client (application) ID |
+| `MAIL_REFRESH_TOKEN` | *(empty)* | OAuth2 refresh token for `MAIL_FROM`'s mailbox (see below) |
+| `MAIL_FROM` | *(empty)* | Sender address on outgoing mail; must match the mailbox the refresh token was issued for |
+| `MAIL_SCOPE` | `https://outlook.office.com/SMTP.Send offline_access` | OAuth2 scopes requested when refreshing the access token |
+| `MAIL_TOKEN_URL` | `https://login.microsoftonline.com/consumers/oauth2/v2.0/token` | Microsoft identity platform token endpoint; use a tenant-specific or `organizations`/`common` URL for a Microsoft 365 work/school account instead of a personal Outlook.com account |
 | `S3_BUCKET` | *(empty)* | S3 bucket that media files are read from |
 | `S3_REGION` | `us-east-1` | AWS region of the bucket |
 | `S3_ENDPOINT` | *(empty)* | Optional endpoint override, for S3-compatible services (e.g. MinIO) |
 | `S3_ACCESS_KEY` | *(empty)* | Access key; if empty, falls back to the default AWS credentials chain |
 | `S3_SECRET_KEY` | *(empty)* | Secret key, used together with `S3_ACCESS_KEY` |
 | `S3_PATH_STYLE_ACCESS` | `false` | Enable path-style bucket access (usually required for S3-compatible services) |
+
+`MAIL_CLIENT_ID` and `MAIL_REFRESH_TOKEN` come from a one-time OAuth2 setup, not a per-deploy
+secret you type in: register a public client app in Azure (Microsoft Entra ID) for
+`MAIL_FROM`'s mailbox, grant it the `SMTP.Send` and `offline_access` scopes, then run an
+interactive device-code or authorization-code flow (e.g. via Postman) once to obtain a refresh
+token. Store the resulting client ID and refresh token as `MAIL_CLIENT_ID` / `MAIL_REFRESH_TOKEN`;
+the app exchanges the refresh token for a fresh access token automatically before each send.
 
 ### Media
 
