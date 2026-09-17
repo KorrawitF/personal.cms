@@ -49,6 +49,9 @@ public class Forms {
     @Column(name = "mail_body_template")
     private String mailBodyTemplate;
 
+    @Column(name = "mail_sender_name")
+    private String mailSenderName;
+
     @Column(name = "created_at", nullable = false)
     private Instant createdAt;
 
@@ -63,7 +66,7 @@ public class Forms {
 
     public Forms(Integer id, String slug, String submitLabel, String sendingLabel, String note, String optionalLabel,
             String invalidMessage, String failedMessage, String successMessage, String mailSubjectTemplate,
-            String mailBodyTemplate, Instant createdAt, Instant updatedAt) {
+            String mailBodyTemplate, String mailSenderName, Instant createdAt, Instant updatedAt) {
         this.id = id;
         this.slug = slug;
         this.submitLabel = submitLabel;
@@ -75,6 +78,7 @@ public class Forms {
         this.successMessage = successMessage;
         this.mailSubjectTemplate = mailSubjectTemplate;
         this.mailBodyTemplate = mailBodyTemplate;
+        this.mailSenderName = mailSenderName;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -161,6 +165,14 @@ public class Forms {
 
     public void setMailBodyTemplate(String mailBodyTemplate) {
         this.mailBodyTemplate = mailBodyTemplate;
+    }
+
+    public String getMailSenderName() {
+        return mailSenderName;
+    }
+
+    public void setMailSenderName(String mailSenderName) {
+        this.mailSenderName = mailSenderName;
     }
 
     public Instant getCreatedAt() {

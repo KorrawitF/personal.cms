@@ -8,6 +8,7 @@ body:
   content: |-
     {
       "subject": "New résumé request from {{field.name}}",
-      "body": "Hi,\n\nYou've received a new submission on the \"{{slug}}\" form:\n\n{{fields}}\n\nReply to: {{recipient}}"
+      "body": "Hi,\n\nYou've received a new submission on the \"{{slug}}\" form:\n\n{{fields}}\n\nReply to: {{recipient}}",
+      "senderName": "Personal CMS — Résumé Requests"
     }
 order: 8000

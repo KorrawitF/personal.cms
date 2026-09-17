@@ -17,6 +17,7 @@ body:
       "successMessage": "{resume} is on its way to {email}. It carries my contact details too, so you can reply straight back.",
       "mailSubjectTemplate": "New résumé request from {{field.name}}",
       "mailBodyTemplate": "Hi,\n\nYou've received a new submission on the \"{{slug}}\" form:\n\n{{fields}}\n\nReply to: {{recipient}}",
+      "mailSenderName": "Personal CMS — Résumé Requests",
       "fields": [
         {
           "fieldKey": "name",

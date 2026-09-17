@@ -64,22 +64,25 @@ public class FormsService {
 
     public MailTemplate getMailTemplate(int id) {
         Forms form = findById(id);
-        return new MailTemplate(form.getMailSubjectTemplate(), form.getMailBodyTemplate());
+        return new MailTemplate(form.getMailSubjectTemplate(), form.getMailBodyTemplate(), form.getMailSenderName());
     }
 
     public MailTemplate updateMailTemplate(int id, MailTemplate template) {
         Forms form = findById(id);
         form.setMailSubjectTemplate(template == null ? null : template.subject());
         form.setMailBodyTemplate(template == null ? null : template.body());
+        form.setMailSenderName(template == null ? null : template.senderName());
         form.setUpdatedAt(Instant.now());
         Forms saved = formsRepository.save(form);
-        return new MailTemplate(saved.getMailSubjectTemplate(), saved.getMailBodyTemplate());
+        return new MailTemplate(saved.getMailSubjectTemplate(), saved.getMailBodyTemplate(),
+                saved.getMailSenderName());
     }
 
     public void deleteMailTemplate(int id) {
         Forms form = findById(id);
         form.setMailSubjectTemplate(null);
         form.setMailBodyTemplate(null);
+        form.setMailSenderName(null);
         form.setUpdatedAt(Instant.now());
         formsRepository.save(form);
     }
@@ -92,7 +95,8 @@ public class FormsService {
         String recipient = resolveRecipient(form, values);
         String subject = renderSubject(form, slug, recipient, values);
         String body = renderBody(form, recipient, values);
-        mailService.send(recipient, subject, body);
+        String senderName = renderSenderName(form, recipient, values);
+        mailService.send(recipient, subject, body, senderName);
 
         return new FormSubmissionResult(UUID.randomUUID().toString(), recipient, Instant.now());
     }
@@ -147,6 +151,14 @@ public class FormsService {
         String template = form.getMailBodyTemplate();
         if (template == null || template.isBlank()) {
             return buildBody(form, values);
+        }
+        return renderTemplate(template, form, recipient, values);
+    }
+
+    private String renderSenderName(Forms form, String recipient, Map<String, String> values) {
+        String template = form.getMailSenderName();
+        if (template == null || template.isBlank()) {
+            return null;
         }
         return renderTemplate(template, form, recipient, values);
     }

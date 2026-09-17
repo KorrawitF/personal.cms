@@ -47,11 +47,12 @@ public class MailService {
     }
 
     @Async
-    public void send(String to, String subject, String body) {
+    public void send(String to, String subject, String body, String senderName) {
         try {
             MimeMessage message = new MimeMessage(mailSession);
             if (fromAddress != null && !fromAddress.isBlank()) {
-                message.setFrom(new InternetAddress(fromAddress));
+                message.setFrom(senderName == null || senderName.isBlank() ? new InternetAddress(fromAddress)
+                        : new InternetAddress(fromAddress, senderName, StandardCharsets.UTF_8.name()));
             }
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
             message.setSubject(subject);
