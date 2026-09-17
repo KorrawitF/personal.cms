@@ -46,7 +46,7 @@ public class Forms {
     @Column(name = "mail_subject_template")
     private String mailSubjectTemplate;
 
-    @Column(name = "mail_body_template")
+    @Column(name = "mail_body_template", length = 500)
     private String mailBodyTemplate;
 
     @Column(name = "mail_sender_name")
