@@ -1,0 +1,1026 @@
+{
+  "info": {
+    "_postman_id": "c0bc4863-a594-4955-a0a5-d83b7fc4f74e",
+    "name": "Personal CMS API",
+    "description": "CRUD endpoints for Project, WorkExperiences, the SkillDomains aggregate (SkillDomains -> Skills -> Experiences), Content, ContactMethod, the Forms aggregate (Forms -> FormFields), and Media (S3-backed file retrieval).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ],
+  "item": [
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "List all",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/projects",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "projects"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get one",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/projects/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "projects",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Personal CMS\",\n  \"role\": \"Solo developer\",\n  \"icon\": \"folder\",\n  \"banner\": \"https://example.com/banner.png\",\n  \"summary\": \"A headless CMS for my portfolio\",\n  \"detail\": \"Built with Spring Boot and Hibernate.\",\n  \"techStack\": [\"Java\", \"Spring Boot\", \"Hibernate\", \"PostgreSQL\"],\n  \"highlights\": [\"Aggregate-root REST API\", \"Hexagonal architecture\"],\n  \"repoUrl\": \"https://github.com/korrawit/personal.cms\",\n  \"demoUrl\": \"https://cms.korrawit.dev\",\n  \"status\": \"in-progress\",\n  \"confidential\": false,\n  \"startDate\": \"2026-01-15\",\n  \"endDate\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/projects",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "projects"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Personal CMS\",\n  \"role\": \"Solo developer\",\n  \"icon\": \"folder\",\n  \"banner\": \"https://example.com/banner.png\",\n  \"summary\": \"A headless CMS for my portfolio\",\n  \"detail\": \"Now with a REST API layer.\",\n  \"techStack\": [\"Java\", \"Spring Boot\", \"Hibernate\", \"PostgreSQL\"],\n  \"highlights\": [\"Aggregate-root REST API\", \"Hexagonal architecture\"],\n  \"repoUrl\": \"https://github.com/korrawit/personal.cms\",\n  \"demoUrl\": \"https://cms.korrawit.dev\",\n  \"status\": \"in-progress\",\n  \"confidential\": false,\n  \"startDate\": \"2026-01-15\",\n  \"endDate\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/projects/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "projects",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/projects/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "projects",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Work Experiences",
+      "item": [
+        {
+          "name": "List all",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/work-experiences",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "work-experiences"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get one",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/work-experiences/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "work-experiences",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jobTitle\": \"Backend Engineer\",\n  \"companyName\": \"Acme Corp\",\n  \"detail\": \"Built and maintained internal APIs.\",\n  \"techStack\": [\"Java\", \"Spring Boot\", \"PostgreSQL\"],\n  \"icon\": \"briefcase\",\n  \"startDate\": \"2023-06-01\",\n  \"endDate\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/work-experiences",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "work-experiences"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jobTitle\": \"Senior Backend Engineer\",\n  \"companyName\": \"Acme Corp\",\n  \"detail\": \"Promoted; leading the API platform team.\",\n  \"techStack\": [\"Java\", \"Spring Boot\", \"PostgreSQL\", \"Kafka\"],\n  \"icon\": \"briefcase\",\n  \"startDate\": \"2023-06-01\",\n  \"endDate\": null\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/work-experiences/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "work-experiences",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/work-experiences/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "work-experiences",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Skill Domains",
+      "item": [
+        {
+          "name": "List all",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/skill-domains",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "skill-domains"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get one",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/skill-domains/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "skill-domains",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create (with nested skills & experiences)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Backend Development\",\n  \"color\": \"#4287f5\",\n  \"summary\": \"Server-side engineering skills\",\n  \"skills\": [\n    {\n      \"name\": \"Spring Boot\",\n      \"level\": 4,\n      \"summary\": \"Building REST APIs with Spring Boot\",\n      \"tools\": [\"Spring Boot\", \"Hibernate\", \"Maven\"],\n      \"useCases\": [\"CRUD APIs\", \"Microservices\"],\n      \"parent\": null,\n      \"icon\": \"spring\",\n      \"experiences\": [\n        {\n          \"title\": \"CMS REST API\",\n          \"org\": \"Personal project\",\n          \"detail\": \"Designed the aggregate-root CRUD API.\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/skill-domains",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "skill-domains"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update (replaces the whole tree)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Backend Development\",\n  \"color\": \"#4287f5\",\n  \"summary\": \"Server-side and infrastructure engineering skills\",\n  \"skills\": [\n    {\n      \"id\": 1,\n      \"name\": \"Spring Boot\",\n      \"level\": 5,\n      \"summary\": \"Building REST APIs with Spring Boot\",\n      \"tools\": [\"Spring Boot\", \"Hibernate\", \"Maven\"],\n      \"useCases\": [\"CRUD APIs\", \"Microservices\"],\n      \"parent\": null,\n      \"icon\": \"spring\",\n      \"experiences\": [\n        {\n          \"id\": 1,\n          \"title\": \"CMS REST API\",\n          \"org\": \"Personal project\",\n          \"detail\": \"Designed and shipped the aggregate-root CRUD API.\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/skill-domains/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "skill-domains",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete (cascades skills & experiences)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/skill-domains/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "skill-domains",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Content",
+      "item": [
+        {
+          "name": "List all",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/contents",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "contents"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get one",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/contents/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "contents",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"page\": \"home\",\n  \"content\": {\n    \"heading\": \"Welcome to my portfolio\",\n    \"subheading\": \"Backend engineer building things on the JVM\",\n    \"ctaLabel\": \"View projects\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/contents",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "contents"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"page\": \"home\",\n  \"content\": {\n    \"heading\": \"Welcome to my portfolio\",\n    \"subheading\": \"Backend engineer building things on the JVM\",\n    \"ctaLabel\": \"See what I've shipped\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/contents/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "contents",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/contents/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "contents",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Contact Methods",
+      "item": [
+        {
+          "name": "List all",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/contact-methods",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "contact-methods"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get one",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/contact-methods/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "contact-methods",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"slug\": \"email\",\n  \"name\": \"Email\",\n  \"handle\": \"korrawit.universal@gmail.com\",\n  \"summary\": \"Best way to reach me directly.\",\n  \"detail\": null,\n  \"status\": \"available\",\n  \"type\": \"email\",\n  \"href\": \"mailto:korrawit.universal@gmail.com\",\n  \"sortOrder\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/contact-methods",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "contact-methods"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"slug\": \"email\",\n  \"name\": \"Email\",\n  \"handle\": \"korrawit.universal@gmail.com\",\n  \"summary\": \"Best way to reach me directly - I check this daily.\",\n  \"detail\": null,\n  \"status\": \"available\",\n  \"type\": \"email\",\n  \"href\": \"mailto:korrawit.universal@gmail.com\",\n  \"sortOrder\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/contact-methods/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "contact-methods",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/contact-methods/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "contact-methods",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Forms",
+      "item": [
+        {
+          "name": "List all",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/forms",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "forms"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get one",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/forms/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "forms",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create (with nested fields)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"slug\": \"resume-request\",\n  \"submitLabel\": \"Send me the résumé\",\n  \"sendingLabel\": \"Sending…\",\n  \"note\": \"Your address is used for this one mail — nothing else.\",\n  \"optionalLabel\": \"optional\",\n  \"invalidMessage\": \"Check the highlighted fields and try again.\",\n  \"failedMessage\": \"The mail could not be sent just now. Try again in a moment.\",\n  \"successMessage\": \"{resume} is on its way to {email}. It carries my contact details too, so you can reply straight back.\",\n  \"mailSubjectTemplate\": \"New résumé request from {{field.name}}\",\n  \"mailBodyTemplate\": \"Hi,\\n\\nYou've received a new submission on the \\\"{{slug}}\\\" form:\\n\\n{{fields}}\\n\\nReply to: {{recipient}}\",\n  \"fields\": [\n    {\n      \"fieldKey\": \"name\",\n      \"kind\": \"text\",\n      \"label\": \"Your name\",\n      \"placeholder\": \"Jane Doe\",\n      \"required\": true,\n      \"requiredError\": \"Tell me who I am sending this to.\",\n      \"sortOrder\": 1\n    },\n    {\n      \"fieldKey\": \"email\",\n      \"kind\": \"email\",\n      \"label\": \"Email\",\n      \"placeholder\": \"jane@company.com\",\n      \"required\": true,\n      \"requiredError\": \"An email address is required — that is where the résumé goes.\",\n      \"invalidError\": \"That does not look like a valid email address.\",\n      \"sortOrder\": 2\n    },\n    {\n      \"fieldKey\": \"company\",\n      \"kind\": \"text\",\n      \"label\": \"Company\",\n      \"placeholder\": \"Where you are writing from\",\n      \"required\": false,\n      \"sortOrder\": 3\n    },\n    {\n      \"fieldKey\": \"role\",\n      \"kind\": \"text\",\n      \"label\": \"Role you are hiring for\",\n      \"placeholder\": \"Backend Engineer\",\n      \"required\": false,\n      \"sortOrder\": 4\n    },\n    {\n      \"fieldKey\": \"message\",\n      \"kind\": \"textarea\",\n      \"label\": \"Anything I should know\",\n      \"placeholder\": \"A line about the role, the team or the timeline.\",\n      \"required\": false,\n      \"maxLength\": 500,\n      \"maxLengthError\": \"Keep it under 500 characters.\",\n      \"sortOrder\": 5\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/forms",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "forms"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update (replaces the whole tree)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"slug\": \"resume-request\",\n  \"submitLabel\": \"Send me the résumé\",\n  \"sendingLabel\": \"Sending…\",\n  \"note\": \"Your address is used for this one mail — nothing else.\",\n  \"optionalLabel\": \"optional\",\n  \"invalidMessage\": \"Check the highlighted fields and try again.\",\n  \"failedMessage\": \"The mail could not be sent just now. Try again in a moment.\",\n  \"successMessage\": \"{resume} is on its way to {email}. It carries my contact details too, so you can reply straight back.\",\n  \"mailSubjectTemplate\": \"New résumé request from {{field.name}}\",\n  \"mailBodyTemplate\": \"Hi,\\n\\nYou've received a new submission on the \\\"{{slug}}\\\" form:\\n\\n{{fields}}\\n\\nReply to: {{recipient}}\",\n  \"fields\": [\n    {\n      \"id\": 1,\n      \"fieldKey\": \"name\",\n      \"kind\": \"text\",\n      \"label\": \"Your name\",\n      \"placeholder\": \"Jane Doe\",\n      \"required\": true,\n      \"requiredError\": \"Tell me who I am sending this to.\",\n      \"sortOrder\": 1\n    },\n    {\n      \"id\": 2,\n      \"fieldKey\": \"email\",\n      \"kind\": \"email\",\n      \"label\": \"Work email\",\n      \"placeholder\": \"jane@company.com\",\n      \"required\": true,\n      \"requiredError\": \"An email address is required — that is where the résumé goes.\",\n      \"invalidError\": \"That does not look like a valid email address.\",\n      \"sortOrder\": 2\n    },\n    {\n      \"id\": 5,\n      \"fieldKey\": \"message\",\n      \"kind\": \"textarea\",\n      \"label\": \"Anything I should know\",\n      \"placeholder\": \"A line about the role, the team or the timeline.\",\n      \"required\": false,\n      \"maxLength\": 800,\n      \"maxLengthError\": \"Keep it under 800 characters.\",\n      \"sortOrder\": 3\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/forms/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "forms",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete (cascades fields)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/forms/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "forms",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Submit (sends mail)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Jane Doe\",\n  \"email\": \"jane@company.com\",\n  \"company\": \"Acme\",\n  \"role\": \"Backend Engineer\",\n  \"message\": \"Loved your portfolio, let's talk.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/forms/resume-request/submissions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "forms",
+                "resume-request",
+                "submissions"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get mail template",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/forms/1/mail-template",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "forms",
+                "1",
+                "mail-template"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update mail template",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subject\": \"New résumé request from {{field.name}}\",\n  \"body\": \"Hi,\\n\\nYou've received a new submission on the \\\"{{slug}}\\\" form:\\n\\n{{fields}}\\n\\nReply to: {{recipient}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/forms/1/mail-template",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "forms",
+                "1",
+                "mail-template"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete mail template (clears the template)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/forms/1/mail-template",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "forms",
+                "1",
+                "mail-template"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Media",
+      "item": [
+        {
+          "name": "List all",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/media",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "media"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get one (metadata)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/media/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "media",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register (points at an existing S3 object)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"images/hero.png\",\n  \"fileName\": \"hero.png\",\n  \"contentType\": \"image/png\",\n  \"size\": 204800\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/media",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "media"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"images/hero.png\",\n  \"fileName\": \"hero-v2.png\",\n  \"contentType\": \"image/png\",\n  \"size\": 204800\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/media/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "media",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/media/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "media",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get file (streams bytes from S3)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/media/1/file",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "media",
+                "1",
+                "file"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
