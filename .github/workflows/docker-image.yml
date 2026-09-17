@@ -41,6 +41,7 @@ jobs:
           tags: |
             type=raw,value=1.0.0,enable={{is_default_branch}}
             type=semver,pattern={{version}},enable=${{ github.event_name == 'release' }}
+            type=raw,value={{tag}},enable=${{ github.event_name == 'release' }}
 
     - name: Build and Push Image
       uses: docker/build-push-action@v5
