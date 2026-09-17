@@ -16,7 +16,8 @@ public final class FormsMapper {
         }
         Forms domain = new Forms(entity.getId(), entity.getSlug(), entity.getSubmitLabel(), entity.getSendingLabel(),
                 entity.getNote(), entity.getOptionalLabel(), entity.getInvalidMessage(), entity.getFailedMessage(),
-                entity.getSuccessMessage(), entity.getCreatedAt(), entity.getUpdatedAt());
+                entity.getSuccessMessage(), entity.getMailSubjectTemplate(), entity.getMailBodyTemplate(),
+                entity.getCreatedAt(), entity.getUpdatedAt());
         if (entity.getFields() != null) {
             domain.setFields(entity.getFields().stream().map(FormFieldsMapper::toDomain).toArray(FormFields[]::new));
         }
@@ -30,7 +31,8 @@ public final class FormsMapper {
         korrawit.cms.infrastructure.persistence.model.Forms entity = new korrawit.cms.infrastructure.persistence.model.Forms(
                 domain.getId(), domain.getSlug(), domain.getSubmitLabel(), domain.getSendingLabel(),
                 domain.getNote(), domain.getOptionalLabel(), domain.getInvalidMessage(), domain.getFailedMessage(),
-                domain.getSuccessMessage(), domain.getCreatedAt(), domain.getUpdatedAt());
+                domain.getSuccessMessage(), domain.getMailSubjectTemplate(), domain.getMailBodyTemplate(),
+                domain.getCreatedAt(), domain.getUpdatedAt());
         if (domain.getFields() != null) {
             entity.setFields(
                     Arrays.stream(domain.getFields()).map(field -> FormFieldsMapper.toEntity(field, entity)).toList());

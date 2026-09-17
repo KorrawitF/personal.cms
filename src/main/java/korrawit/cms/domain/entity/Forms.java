@@ -13,6 +13,8 @@ public class Forms {
     private String invalidMessage;
     private String failedMessage;
     private String successMessage;
+    private String mailSubjectTemplate;
+    private String mailBodyTemplate;
     private FormFields[] fields;
     private Instant createdAt;
     private Instant updatedAt;
@@ -21,8 +23,8 @@ public class Forms {
     }
 
     public Forms(Integer id, String slug, String submitLabel, String sendingLabel, String note, String optionalLabel,
-            String invalidMessage, String failedMessage, String successMessage, Instant createdAt,
-            Instant updatedAt) {
+            String invalidMessage, String failedMessage, String successMessage, String mailSubjectTemplate,
+            String mailBodyTemplate, Instant createdAt, Instant updatedAt) {
         this.id = id;
         this.slug = slug;
         this.submitLabel = submitLabel;
@@ -32,6 +34,8 @@ public class Forms {
         this.invalidMessage = invalidMessage;
         this.failedMessage = failedMessage;
         this.successMessage = successMessage;
+        this.mailSubjectTemplate = mailSubjectTemplate;
+        this.mailBodyTemplate = mailBodyTemplate;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -106,6 +110,22 @@ public class Forms {
 
     public void setSuccessMessage(String successMessage) {
         this.successMessage = successMessage;
+    }
+
+    public String getMailSubjectTemplate() {
+        return mailSubjectTemplate;
+    }
+
+    public void setMailSubjectTemplate(String mailSubjectTemplate) {
+        this.mailSubjectTemplate = mailSubjectTemplate;
+    }
+
+    public String getMailBodyTemplate() {
+        return mailBodyTemplate;
+    }
+
+    public void setMailBodyTemplate(String mailBodyTemplate) {
+        this.mailBodyTemplate = mailBodyTemplate;
     }
 
     public Instant getCreatedAt() {

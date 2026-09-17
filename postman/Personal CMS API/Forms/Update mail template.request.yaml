@@ -1,0 +1,13 @@
+$kind: http-request
+url: "{{baseUrl}}/api/forms/1/mail-template"
+method: PUT
+headers:
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "subject": "New résumé request from {{field.name}}",
+      "body": "Hi,\n\nYou've received a new submission on the \"{{slug}}\" form:\n\n{{fields}}\n\nReply to: {{recipient}}"
+    }
+order: 8000

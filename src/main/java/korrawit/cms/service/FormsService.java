@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import korrawit.cms.domain.dto.FormSubmissionResult;
+import korrawit.cms.domain.dto.MailTemplate;
 import korrawit.cms.domain.entity.FormFields;
 import korrawit.cms.domain.entity.Forms;
 import korrawit.cms.domain.repository.FormsRepository;
@@ -61,14 +62,37 @@ public class FormsService {
         formsRepository.deleteById(id);
     }
 
+    public MailTemplate getMailTemplate(int id) {
+        Forms form = findById(id);
+        return new MailTemplate(form.getMailSubjectTemplate(), form.getMailBodyTemplate());
+    }
+
+    public MailTemplate updateMailTemplate(int id, MailTemplate template) {
+        Forms form = findById(id);
+        form.setMailSubjectTemplate(template == null ? null : template.subject());
+        form.setMailBodyTemplate(template == null ? null : template.body());
+        form.setUpdatedAt(Instant.now());
+        Forms saved = formsRepository.save(form);
+        return new MailTemplate(saved.getMailSubjectTemplate(), saved.getMailBodyTemplate());
+    }
+
+    public void deleteMailTemplate(int id) {
+        Forms form = findById(id);
+        form.setMailSubjectTemplate(null);
+        form.setMailBodyTemplate(null);
+        form.setUpdatedAt(Instant.now());
+        formsRepository.save(form);
+    }
+
     public FormSubmissionResult submit(String slug, Map<String, String> values) {
         Forms form = formsRepository.findBySlug(slug)
                 .orElseThrow(() -> new ResourceNotFoundException("Form not found: " + slug));
         validate(form, values);
 
         String recipient = resolveRecipient(form, values);
-        String body = buildBody(form, values);
-        mailService.send(recipient, "New \"%s\" submission".formatted(slug), body);
+        String subject = renderSubject(form, slug, recipient, values);
+        String body = renderBody(form, recipient, values);
+        mailService.send(recipient, subject, body);
 
         return new FormSubmissionResult(UUID.randomUUID().toString(), recipient, Instant.now());
     }
@@ -109,6 +133,37 @@ public class FormsService {
         if (!errors.isEmpty()) {
             throw new FormValidationException(errors);
         }
+    }
+
+    private String renderSubject(Forms form, String slug, String recipient, Map<String, String> values) {
+        String template = form.getMailSubjectTemplate();
+        if (template == null || template.isBlank()) {
+            return "New \"%s\" submission".formatted(slug);
+        }
+        return renderTemplate(template, form, recipient, values);
+    }
+
+    private String renderBody(Forms form, String recipient, Map<String, String> values) {
+        String template = form.getMailBodyTemplate();
+        if (template == null || template.isBlank()) {
+            return buildBody(form, values);
+        }
+        return renderTemplate(template, form, recipient, values);
+    }
+
+    private String renderTemplate(String template, Forms form, String recipient, Map<String, String> values) {
+        String result = template.replace("{{slug}}", form.getSlug())
+                .replace("{{recipient}}", recipient == null ? "" : recipient);
+        if (form.getFields() != null) {
+            StringBuilder fieldsBlock = new StringBuilder();
+            for (FormFields field : form.getFields()) {
+                String value = values == null ? null : values.get(field.getFieldKey());
+                fieldsBlock.append(field.getLabel()).append(": ").append(value == null ? "" : value).append('\n');
+                result = result.replace("{{field." + field.getFieldKey() + "}}", value == null ? "" : value);
+            }
+            result = result.replace("{{fields}}", fieldsBlock.toString().stripTrailing());
+        }
+        return result;
     }
 
     private String buildBody(Forms form, Map<String, String> values) {

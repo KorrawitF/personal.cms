@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import korrawit.cms.domain.dto.FormSubmissionResult;
+import korrawit.cms.domain.dto.MailTemplate;
 import korrawit.cms.domain.entity.Forms;
 import korrawit.cms.service.FormsService;
 
@@ -59,5 +60,21 @@ public class FormsController {
     @ResponseStatus(HttpStatus.CREATED)
     public FormSubmissionResult submit(@PathVariable String slug, @RequestBody Map<String, String> values) {
         return formsService.submit(slug, values);
+    }
+
+    @GetMapping("/{id}/mail-template")
+    public MailTemplate getMailTemplate(@PathVariable int id) {
+        return formsService.getMailTemplate(id);
+    }
+
+    @PutMapping("/{id}/mail-template")
+    public MailTemplate updateMailTemplate(@PathVariable int id, @RequestBody MailTemplate template) {
+        return formsService.updateMailTemplate(id, template);
+    }
+
+    @DeleteMapping("/{id}/mail-template")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteMailTemplate(@PathVariable int id) {
+        formsService.deleteMailTemplate(id);
     }
 }

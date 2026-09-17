@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{baseUrl}}/api/forms/1/mail-template"
+method: DELETE
+order: 9000
