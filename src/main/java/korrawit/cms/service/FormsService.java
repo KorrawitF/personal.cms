@@ -64,7 +64,8 @@ public class FormsService {
 
     public MailTemplate getMailTemplate(int id) {
         Forms form = findById(id);
-        return new MailTemplate(form.getMailSubjectTemplate(), form.getMailBodyTemplate(), form.getMailSenderName());
+        return new MailTemplate(form.getMailSubjectTemplate(), form.getMailBodyTemplate(), form.getMailSenderName(),
+                form.getMailAttachmentMediaId());
     }
 
     public MailTemplate updateMailTemplate(int id, MailTemplate template) {
@@ -72,10 +73,11 @@ public class FormsService {
         form.setMailSubjectTemplate(template == null ? null : template.subject());
         form.setMailBodyTemplate(template == null ? null : template.body());
         form.setMailSenderName(template == null ? null : template.senderName());
+        form.setMailAttachmentMediaId(template == null ? null : template.attachmentMediaId());
         form.setUpdatedAt(Instant.now());
         Forms saved = formsRepository.save(form);
         return new MailTemplate(saved.getMailSubjectTemplate(), saved.getMailBodyTemplate(),
-                saved.getMailSenderName());
+                saved.getMailSenderName(), saved.getMailAttachmentMediaId());
     }
 
     public void deleteMailTemplate(int id) {
@@ -83,6 +85,7 @@ public class FormsService {
         form.setMailSubjectTemplate(null);
         form.setMailBodyTemplate(null);
         form.setMailSenderName(null);
+        form.setMailAttachmentMediaId(null);
         form.setUpdatedAt(Instant.now());
         formsRepository.save(form);
     }
@@ -96,7 +99,7 @@ public class FormsService {
         String subject = renderSubject(form, slug, recipient, values);
         String body = renderBody(form, recipient, values);
         String senderName = renderSenderName(form, recipient, values);
-        mailService.send(recipient, subject, body, senderName);
+        mailService.send(recipient, subject, body, senderName, form.getMailAttachmentMediaId());
 
         return new FormSubmissionResult(UUID.randomUUID().toString(), recipient, Instant.now());
     }

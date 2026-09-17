@@ -16,6 +16,7 @@ public class Forms {
     private String mailSubjectTemplate;
     private String mailBodyTemplate;
     private String mailSenderName;
+    private Integer mailAttachmentMediaId;
     private FormFields[] fields;
     private Instant createdAt;
     private Instant updatedAt;
@@ -25,7 +26,8 @@ public class Forms {
 
     public Forms(Integer id, String slug, String submitLabel, String sendingLabel, String note, String optionalLabel,
             String invalidMessage, String failedMessage, String successMessage, String mailSubjectTemplate,
-            String mailBodyTemplate, String mailSenderName, Instant createdAt, Instant updatedAt) {
+            String mailBodyTemplate, String mailSenderName, Integer mailAttachmentMediaId, Instant createdAt,
+            Instant updatedAt) {
         this.id = id;
         this.slug = slug;
         this.submitLabel = submitLabel;
@@ -38,6 +40,7 @@ public class Forms {
         this.mailSubjectTemplate = mailSubjectTemplate;
         this.mailBodyTemplate = mailBodyTemplate;
         this.mailSenderName = mailSenderName;
+        this.mailAttachmentMediaId = mailAttachmentMediaId;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -136,6 +139,14 @@ public class Forms {
 
     public void setMailSenderName(String mailSenderName) {
         this.mailSenderName = mailSenderName;
+    }
+
+    public Integer getMailAttachmentMediaId() {
+        return mailAttachmentMediaId;
+    }
+
+    public void setMailAttachmentMediaId(Integer mailAttachmentMediaId) {
+        this.mailAttachmentMediaId = mailAttachmentMediaId;
     }
 
     public Instant getCreatedAt() {

@@ -1,5 +1,6 @@
 package korrawit.cms.service;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -12,12 +13,18 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import jakarta.activation.DataHandler;
 import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
 import jakarta.mail.Session;
 import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeBodyPart;
 import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeMultipart;
+import jakarta.mail.util.ByteArrayDataSource;
 import korrawit.cms.domain.entity.MailTransaction;
+import korrawit.cms.domain.entity.MediaObject;
 import korrawit.cms.domain.repository.MailTransactionRepository;
 import korrawit.cms.error.MailDeliveryException;
 
@@ -29,25 +36,27 @@ public class MailService {
     private final Session mailSession;
     private final OAuthTokenService oAuthTokenService;
     private final MailTransactionRepository mailTransactionRepository;
+    private final MediaService mediaService;
     private final String fromAddress;
     private final String host;
     private final int port;
 
     public MailService(Session mailSession, OAuthTokenService oAuthTokenService,
-            MailTransactionRepository mailTransactionRepository,
+            MailTransactionRepository mailTransactionRepository, MediaService mediaService,
             @Value("${app.mail.from}") String fromAddress,
             @Value("${app.mail.host}") String host,
             @Value("${app.mail.port}") int port) {
         this.mailSession = mailSession;
         this.oAuthTokenService = oAuthTokenService;
         this.mailTransactionRepository = mailTransactionRepository;
+        this.mediaService = mediaService;
         this.fromAddress = fromAddress;
         this.host = host;
         this.port = port;
     }
 
     @Async
-    public void send(String to, String subject, String body, String senderName) {
+    public void send(String to, String subject, String body, String senderName, Integer attachmentMediaId) {
         try {
             MimeMessage message = new MimeMessage(mailSession);
             if (fromAddress != null && !fromAddress.isBlank()) {
@@ -56,7 +65,12 @@ public class MailService {
             }
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
             message.setSubject(subject);
-            message.setText(body);
+
+            if (attachmentMediaId == null) {
+                message.setText(body);
+            } else {
+                message.setContent(buildMultipart(body, attachmentMediaId));
+            }
 
             String accessToken = oAuthTokenService.getAccessToken();
             try (Transport transport = mailSession.getTransport("smtp")) {
@@ -70,6 +84,22 @@ public class MailService {
 
         Instant now = Instant.now();
         mailTransactionRepository.save(new MailTransaction(null, hash(to), subject, body, now, now));
+    }
+
+    private MimeMultipart buildMultipart(String body, int attachmentMediaId) throws MessagingException, IOException {
+        MimeBodyPart textPart = new MimeBodyPart();
+        textPart.setText(body);
+
+        MediaObject attachment = mediaService.fetchFile(attachmentMediaId);
+        MimeBodyPart attachmentPart = new MimeBodyPart();
+        attachmentPart.setDataHandler(
+                new DataHandler(new ByteArrayDataSource(attachment.getContent(), attachment.getContentType())));
+        attachmentPart.setFileName(attachment.getFileName());
+
+        MimeMultipart multipart = new MimeMultipart();
+        multipart.addBodyPart(textPart);
+        multipart.addBodyPart(attachmentPart);
+        return multipart;
     }
 
     private static String hash(String value) {

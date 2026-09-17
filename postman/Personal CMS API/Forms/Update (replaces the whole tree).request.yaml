@@ -18,6 +18,7 @@ body:
       "mailSubjectTemplate": "New résumé request from {{field.name}}",
       "mailBodyTemplate": "Hi,\n\nYou've received a new submission on the \"{{slug}}\" form:\n\n{{fields}}\n\nReply to: {{recipient}}",
       "mailSenderName": "Personal CMS — Résumé Requests",
+      "mailAttachmentMediaId": 1,
       "fields": [
         {
           "id": 1,
