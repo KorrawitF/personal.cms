@@ -51,7 +51,7 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-				
+
   call-webhook:
     needs: build-and-push
     if: github.event_name == 'release'
